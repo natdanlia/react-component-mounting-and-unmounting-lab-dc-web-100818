@@ -15,15 +15,18 @@ export class RestaurantInput extends Component {
     });
   }
 
-  handleOnLocationChange = event => {
+  handleonLocationChange = event => {
+    // event.persist()
+    // console.log(event)
     this.setState({
-      [event.target.id]: event.target.value
+
+      location: event.target.value
     });
   }
 
   handleOnSubmit = event => {
     event.preventDefault();
-    // add missing code
+    this.props.addRestaurant(this.state)
   }
 
   render() {
@@ -34,13 +37,15 @@ export class RestaurantInput extends Component {
             type="text"
             onChange={(event) => this.handleOnNameChange(event)}
             id="name"
+            value={this.state.name}
             placeholder="restaurant name" />
         </p>
         <p>
           <input
             type="text"
-            onChange={(event) => this.handleOnLocationChange(event)}
+            onChange={(event) => this.handleonLocationChange(event)}
             id="location"
+            value={this.state.location}
             placeholder="location" />
         </p>
         <input type="submit" />
@@ -49,6 +54,21 @@ export class RestaurantInput extends Component {
   }
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    addRestaurant: (restaurant) =>  dispatch(addRestaurant(restaurant))
+  };
+};
+
+
 
 //connect this component by wrapping RestaurantInput below
-export default RestaurantInput
+
+// this could be righr answer or gives us the same result as the bottom
+// export default connect(null, {addRestaurant})(RestaurantInput)
+
+
+// or
+
+
+export default connect(null, mapDispatchToProps)(RestaurantInput)
