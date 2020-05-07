@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -13,3 +14,13 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+=======
+
+import Game from './components/Game';
+import './style.css';
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
+>>>>>>> 41d3ff995dc1268120a8b175dcc23bc71adca1f3

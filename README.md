@@ -1,27 +1,66 @@
-# mapDispatchToProps Lab
+# React: Component Mounting and Unmounting
 
 ## Objectives
 
-Use the __React Redux__ library to connect the store to the __React__
-application.   Utilize the __Provider__ component, and the __connect()__
-function in the process. Make sure to also implement __mapDispatchToProps()__.
+1. Describe what happens in the mounting phase of a React component's lifecycle
+2. Describe what happens in the unmounting phase of a React component's
+   lifecycle
+3. Practice performing setup and teardown actions at the appropriate point in
+   the React component lifecycle.
 
 ## Overview
 
-In this application we will be building an application to keep track of our
-favorite restaurants. We will keep our __React__ application separated from our
-__Redux__ application by using the __Provider__ component and the __connect()__
-function. We will not include a reference to the store in any component except
-for the __Provider__.
+You are a pancake chef in a fancy pancake restaurant. Time is ticking and
+customers are waiting, so you better get those pancakes out quick! Pancakes need
+to be cooked on either side and taken off the pan at the right moment before
+they burn for optimal deliciousness.
 
-## Instructions
+<p align="center">
+  <img src="http://i.imgur.com/yti5NLe.gif"/>
+</p>
 
-Redux is already set up through `index.js` and the reducer `manageRestaurants`.
-Write a __mapDispatchToProps()__ function that allows us to pass dispatched
-actions as props.
+Go on and run the game. It doesn't quite work yet, because some essential bits
+are missing and it's up to you to finish it off!
 
-Remember that __mapDispatchToProps()__ is provided `dispatch` as an argument
-(passed in by `connect` when called), so we can wrap an imported action with
-`dispatch` within __mapDispatchToProps()__. Don't forget that the action
-provided in `actions/restaurants.js` is a function that _must be called_ in
-order to return the action object.
+Pancakes need to be cooked equally on both sides to be yummy. The current
+settings are that if a pancake is cooked for exactly 2 seconds on either side,
+it's considered to be cooked perfectly. If it's cooked for more than 2 seconds
+on either side it will be burnt and otherwise it will be raw. You can change
+these settings in `<Pancake />`!
+
+## Shop needs an opening time
+
+First, you want to record the time your shop was opened. Open `<Game />` and
+notice a `setCurrentTime()` method already exits, but it is not yet called.
+Create a `componentDidMount()` method in `<Game />` which will call the
+`setCurrentTime()` when the component is first created. If you've done that
+correctly, you should see the current time at the top of the page.
+
+## Pancake needs a timer!
+
+Now it's time to implement the actual pancake cooking part of the game. Firstly,
+we need a timer on each pancake so we could record how long it's been cooking.
+Look in `<Pancake />` - the `startInterval()` method is already there. All you
+need to do is add a lifecycle method in `<Pancake />` at `componentDidMount()`
+(that's the point at which the pancake component gets added to the page) which
+will start the counter.
+
+
+## Tidy up the timer
+
+Now that we've set up a timer, we need to make sure we also remove it as soon as
+it's not needed anymore. It is important to always clean up such long-running
+processes as soon as they are no longer needed. You wouldn't leave your dirty
+dishes on the table after you've finished eating - similarly you shouldn't be
+leaving your intervals ticking after the component using them has been
+dismounted. As you can see, a `cleanUpInterval()` function is all set up for
+you, so all you have left to do it call it just before the component gets
+unmounted from the page. That will be in the `componentWillUnmount()` method.
+
+That's it! You've finished off the game! Happy pancake-making!
+
+## Resources
+
+- [React: Component Specs and Lifecycle](https://reactjs.org/docs/react-component.html)
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/react-component-mounting-and-unmounting-lab'>Component Mounting And Unmounting Lab</a> on Learn.co and start learning to code for free.</p>
